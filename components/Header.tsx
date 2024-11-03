@@ -6,7 +6,8 @@ import Link from "next/link";
 import { useActiveSectionContext } from "@/context/ActiveSectionContext";
 
 export default function Header() {
-  const { activeSection, setActiveSection } = useActiveSectionContext();
+  const { activeSection, setActiveSection, setTimeOfLastClick } =
+    useActiveSectionContext();
 
   return (
     <header className="z-[999] relative">
@@ -30,7 +31,10 @@ export default function Header() {
                   activeSection === link.name ? "text-gray-950" : ""
                 } transition`}
                 href={link.hash}
-                onClick={() => setActiveSection(link.name)}
+                onClick={() => {
+                  setActiveSection(link.name);
+                  setTimeOfLastClick(Date.now());
+                }}
               >
                 {link.name}
 
